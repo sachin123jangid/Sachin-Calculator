@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        input[type="text"] {
+            grid-column: 1 / span 4;
+            padding: 10px;
+            text-align: right;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button.grid-2 {
+            grid-column: span 2;
+        }
+
+        button.grid-4 {
+            grid-column: span 4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sachin Calculator</h1>
+
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="appendInput('7')">7</button>
+        <button onclick="appendInput('8')">8</button>
+        <button onclick="appendInput('9')">9</button>
+        <button onclick="appendInput('4')">4</button>
+        <button onclick="appendInput('5')">5</button>
+        <button onclick="appendInput('6')">6</button>
+        <button onclick="appendInput('1')">1</button>
+        <button onclick="appendInput('2')">2</button>
+        <button onclick="appendInput('3')">3</button>
+        <button onclick="appendInput('0')">0</button>
+        <button onclick="appendInput('.')">.</button>
+        <button onclick="performOperation('+')" class="grid-2">+</button>
+        <button onclick="performOperation('-')">-</button>
+        <button onclick="performOperation('*')">x</button>
+        <button onclick="performOperation('/')">/</button>
+        <button onclick="calculateResult()" class="grid-4">=</button>
+    </div>
+
+    <script>
+        var input = '';
+        var displayElement = document.getElementById('display');
+
+        function appendInput(value) {
+            input += value;
+            displayElement.value = input;
+        }
+
+        function performOperation(operator) {
+            input += operator;
+            displayElement.value = input;
+        }
+
+        function calculateResult() {
+            var result;
+            try {
+                result = eval(input);
+                displayElement.value = result;
+            } catch (error) {
+                displayElement.value = 'Error';
+            }
+            input = '';
+        }
+
+        function clearDisplay() {
+            input = '';
+            displayElement.value = '';
+        }
+    </script>
+</body>
+</html>
